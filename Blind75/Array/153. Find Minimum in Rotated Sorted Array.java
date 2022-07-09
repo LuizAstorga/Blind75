@@ -37,20 +37,19 @@ All the integers of nums are unique.
 nums is sorted and rotated between 1 and n times.
 **/
 
-public int findMin(int[] nums) {
-	int right = nums.length - 1;
-	int left = 0;
-	int mid;
+    public int findMin(int[] nums) {
+        int right = nums.length - 1;
+        int left = 0;
 
-	while (left < right) {
-		mid = left + (right - left) / 2;
+        while (left < right){
+            int mid = left + (right - left) / 2; // adjusted for integer overflow
+		
+            if (nums[right] < nums[mid]) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
 
-		if (nums[mid] < nums[right]) {
-		right = mid;
-		} else {
-		left = mid + 1;
-		}
-	}
-
-	return nums[left];
-}
+        return nums[right];
+    }
